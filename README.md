@@ -1,9 +1,9 @@
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/80452137/174097718-4d4e0e29-2b92-40d5-97b3-530e56723f1b.png"  width="250" height="250"/>
+   <img src="https://user-images.githubusercontent.com/80452137/174746967-38313c9f-efc1-4aef-ad68-2e3be6817357.png"  width="250" height="250"/>
 </p>
 
 <p align="center">
-    Fast, powerful and easy to use NodeJs backend API for building powerful eCommerce solutions. Connect with your custom eCommerce frontend framework to sell physical products using CommerceArch.    
+    Fast, powerful and easy to use NodeJs backend API for building powerful eCommerce solutions.
 </p>
 
 <p align="center">
