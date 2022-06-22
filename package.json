@@ -1,0 +1,51 @@
+{
+  "name": "commerce-arch",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">    <img src=\"https://user-images.githubusercontent.com/80452137/174746967-38313c9f-efc1-4aef-ad68-2e3be6817357.png\"  width=\"250\" height=\"250\"/> </p>",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elregalo/commerce-arch.git"
+  },
+  "keywords": [
+    "commerce-arch",
+    "e-commerce",
+    "nodejs",
+    "rest-api",
+    "javascript"
+  ],
+  "author": "Moobi Kabelo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elregalo/commerce-arch/issues"
+  },
+  "homepage": "https://github.com/elregalo/commerce-arch#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.4.0",
+    "helmet": "^5.1.0",
+    "ip": "^1.1.8",
+    "jsonwebtoken": "^8.5.1",
+    "mailgen": "^2.0.25",
+    "mariadb": "^3.0.0",
+    "node-device-detector": "^2.0.3",
+    "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.16",
+    "npm-check-updates": "^14.0.1",
+    "otp-generator": "^4.0.0",
+    "sequelize": "^6.21.0",
+    "twilio": "^3.77.3",
+    "uuid": "^8.3.2",
+    "validator": "^13.7.0",
+    "winston-daily-rotate-file": "^4.7.1"
+  }
+}
