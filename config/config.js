@@ -20,6 +20,7 @@ export const database = {
     username: process.env.MYSQL_USERNAME,
     password: process.env.MYSQL_PASSWORD,
     host: process.env.MYSQL_HOST,
+    dialect: process.env.MYSQL_DIALECT
   },
   MONGO: {
     url: process.env.MONGO_URL,
