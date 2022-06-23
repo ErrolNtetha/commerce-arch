@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "<p align=\"center\">    <img src=\"https://user-images.githubusercontent.com/80452137/174746967-38313c9f-efc1-4aef-ad68-2e3be6817357.png\"  width=\"250\" height=\"250\"/> </p>",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon server",
     "start": "node server.js"
