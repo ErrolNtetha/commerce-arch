@@ -1,0 +1,29 @@
+{
+  "name": "commerce-arch",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">    <img src=\"https://user-images.githubusercontent.com/80452137/174746967-38313c9f-efc1-4aef-ad68-2e3be6817357.png\"  width=\"250\" height=\"250\"/> </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elregalo/commerce-arch.git"
+  },
+  "keywords": [
+    "commerce-arch",
+    "e-commerce",
+    "nodejs",
+    "rest-api",
+    "javascript"
+  ],
+  "author": "Moobi Kabelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elregalo/commerce-arch/issues"
+  },
+  "homepage": "https://github.com/elregalo/commerce-arch#readme",
+  "dependencies": {
+    "node-device-detector": "^2.0.3"
+  }
+}
