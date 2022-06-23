@@ -1,3 +1,11 @@
+/*
+ * Author: Moobi Kabelo
+ * Date: 2022-06-22
+ * Project: commerce-arch/util/logger.js
+ * Description: Lib for logger. This lib is used to log messages
+ * Function: errLog (message) - Logs a success message
+ * Function: successLog (message) - Logs an error message
+ */
 import winston from "winston";
 import "winston-daily-rotate-file";
 
