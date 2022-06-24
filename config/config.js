@@ -7,10 +7,10 @@ dotenv.config();
 // jwt, bcrypt config
 export const auth = {
   bcrypt: {
-    salt: process.env.BCRYPT_SALT
+    salt: process.env.BCRYPT_SALT,
   },
   jwt: {
-    secKey: process.env.JWT_SEC_KEY
+    secKey: process.env.JWT_SEC_KEY,
   },
   maxAge: {
     auth: process.env.MAX_AGE_AUTH,
@@ -37,5 +37,10 @@ export const mailer = {
     port: process.env.NODEMAILER_PORT,
     username: process.env.NODEMAILER_USERNAME,
     password: process.env.NODEMAILER_PASSWORD,
+  },
+  twilio: {
+    sid: process.env.TWILIO_ACCOUNT_SID,
+    token: TWILIO_TOKEN,
+    mobile: process.env.TWILIO_MOBILE
   },
 };
