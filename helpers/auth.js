@@ -41,9 +41,8 @@ export const validateEmail = (email) => {
 export const validateMobile = (mobile) => {
   if (mobile[0] === "0") {
     return mobile.replace(mobile.indexOf("0"), "+27").replace(/\s/g, "");
-  } else {
-    return mobile;
   }
+  return mobile;
 };
 
 export const validatePassword = (password, confirmPassword) => {
