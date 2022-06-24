@@ -40,7 +40,7 @@ export const mailer = {
   },
   twilio: {
     sid: process.env.TWILIO_ACCOUNT_SID,
-    token: TWILIO_TOKEN,
+    token: process.env.TWILIO_TOKEN,
     mobile: process.env.TWILIO_MOBILE
   },
 };
