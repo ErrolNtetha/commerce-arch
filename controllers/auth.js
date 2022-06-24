@@ -1,16 +1,15 @@
 import { auth } from "../config/config.js";
-import bcrypt from "bcrypt";
 import { errorLog } from "../util/logger.js";
+import { generateJWT } from "../lib/jwt.js";
 import {
   deleteUser,
   findUser,
   saveAuthentication,
   saveUser,
-} from "../services/auth.service.js";
-import { generateJWT } from "../lib/jwt.js";
-import {
+} from "../services/auth.service.js";import {
   comparePassword,
   validateEmail,
+  validateMobile,
   validatePassword,
 } from "../helpers/auth.js";
 
@@ -31,7 +30,7 @@ export const signUp = (req, res) => {
           // validate password and return hashed password
           validatePassword(password, confirmPassword)
             .then((hashedPassword) => {
-              saveUser(fullNames, email, mobile, hashedPassword)
+              saveUser(fullNames, email, validateMobile(mobile), hashedPassword)
                 .then((user) => {
                   saveAuthentication(user._id)
                     .then(() => {
@@ -63,8 +62,8 @@ export const signUp = (req, res) => {
                             status: 500,
                           });
                         })
-                        .catch((err) => {
-                          errorLog.error(`deleteUser Error: ${err}`);
+                        .catch((error) => {
+                          errorLog.error(`deleteUser Error: ${error}`);
                           res.status(500).json({
                             message:
                               "Failed to create account, please try again.",
