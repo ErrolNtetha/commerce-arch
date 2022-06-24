@@ -38,17 +38,12 @@ export const validateEmail = (email) => {
   });
 };
 
-// FIXME: verify mobile number and add country code
 export const validateMobile = (mobile) => {
-  return new Promise((resolve) => {
-    if (mobile[0] === "0") {
-      mobile = mobile.replace(mobile.indexOf("0"), "+27").replace(/\s/g, "");
-    } else if (validator.isMobilePhone(mobile)) {
-      reject(new Error("Sorry, mobile is not valid"));
-    } else {
-      resolve();
-    }
-  });
+  if (mobile[0] === "0") {
+    return mobile.replace(mobile.indexOf("0"), "+27").replace(/\s/g, "");
+  } else {
+    return mobile;
+  }
 };
 
 export const validatePassword = (password, confirmPassword) => {
