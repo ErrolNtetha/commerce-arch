@@ -9,7 +9,6 @@
 import "winston-daily-rotate-file";
 import winston from "winston";
 
-
 export const errorLog = winston.createLogger({
   name: "error",
   level: "error",
