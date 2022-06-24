@@ -7,27 +7,27 @@ dotenv.config();
 // jwt, bcrypt config
 export const auth = {
   bcrypt: {
-    salt: 12, // process.env.BCRYPT_SALT
+    salt: process.env.BCRYPT_SALT
   },
   jwt: {
-    secKey: "commerce-arch", //process.env.JWT_SEC_KEY
+    secKey: process.env.JWT_SEC_KEY
   },
   maxAge: {
-    auth: 1000 * 60 * 60 * 24 * 7,
-    resetPassword: 1000 * 60 * 60 * 1 * 7,
+    auth: process.env.MAX_AGE_AUTH,
+    resetPassword: process.env.MAX_AGE_RESET_PASSWORD,
   },
 };
 // database connection details
 export const database = {
   MYSQL: {
-    database: "commerce_arch", // process.env.MYSQL_DATABASE
-    username: "elregalo", //process.env.MYSQL_USERNAME
-    password: "Mk327452_", // process.env.MYSQL_PASSWORD
-    host: "127.0.0.1", // process.env.MYSQL_HOST
-    dialect: "mariadb", // process.env.MYSQL_DIALECT
+    database: process.env.MYSQL_DATABASE,
+    username: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    host: process.env.MYSQL_HOST,
+    dialect: process.env.MYSQL_DIALECT,
   },
   MONGO: {
-    url: "mongodb://0.0.0.0:27017/commerce-arch", //process.env.MONGO_URL,
+    url: process.env.MONGO_URL,
   },
 };
 // nodemailer connections details
