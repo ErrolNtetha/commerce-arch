@@ -50,7 +50,7 @@ export const signUp = (req, res) => {
                         message: "Account created successfully.",
                         status: 201,
                       });
-                      return;
+                      return true;
                     })
                     .catch((err) => {
                       errorLog.error(`saveAuthentication Error: ${err}`);
@@ -143,7 +143,7 @@ export const signIn = (req, res) => {
             message: "Login successful",
             status: 201,
           });
-          return;
+          return true;
         })
         .catch((err) => {
           res.status(500).json({
