@@ -6,7 +6,8 @@ import {
   findUser,
   saveAuthentication,
   saveUser,
-} from "../services/auth.service.js";import {
+} from "../services/auth.service.js";
+import {
   comparePassword,
   validateEmail,
   validateMobile,
