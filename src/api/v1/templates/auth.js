@@ -6,7 +6,7 @@
  * Function: passwordResetEmail (fullName, token) - Sends a password reset email to the user
  * Function: passwordAlertEmail (fullNames, logger) - Send a password alert email to the user
  */
-import { mailGenerator } from "../../../../lib/mail.js";
+import { mailGenerator } from "../lib/mail.js";
 
 export const passwordResetEmail = (fullNames, token) => {
   const email = {
