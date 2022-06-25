@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "<p align=\"center\">    <img src=\"https://user-images.githubusercontent.com/80452137/174746967-38313c9f-efc1-4aef-ad68-2e3be6817357.png\"  width=\"250\" height=\"250\"/> </p>",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon server",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prod": "pm2 start server.js -i 4 --name commerce-arch --interpreter node --watch server.js"
   },
   "repository": {
     "type": "git",
@@ -35,13 +37,14 @@
     "helmet": "^5.1.0",
     "ip": "^1.1.8",
     "jsonwebtoken": "^8.5.1",
-    "mailgen": "^2.0.25",
+    "mailgen": "^2.0.26",
     "mariadb": "^3.0.0",
+    "mongoose": "^6.4.0",
     "node-device-detector": "^2.0.3",
     "nodemailer": "^6.7.5",
-    "nodemon": "^2.0.16",
-    "npm-check-updates": "^14.0.1",
+    "npm-check-updates": "^14.1.1",
     "otp-generator": "^4.0.0",
+    "redis": "^4.1.0",
     "sequelize": "^6.21.0",
     "twilio": "^3.77.3",
     "uuid": "^8.3.2",
