@@ -23,7 +23,7 @@ export const database = {
     dialect: "mariadb", // process.env.MYSQL_DIALECT
   },
   MONGO: {
-    url: process.env.MONGO_URL,
+    url: "mongodb://0.0.0.0:27017/commerce-arch" //process.env.MONGO_URL,
   },
 };
 // nodemailer connections details
