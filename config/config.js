@@ -7,10 +7,14 @@ dotenv.config();
 // jwt, bcrypt config
 export const auth = {
   bcrypt: {
-    salt: "12", // process.env.BCRYPT_SALT
+    salt: 12, // process.env.BCRYPT_SALT
   },
   jwt: {
     secKey: "commerce-arch", //process.env.JWT_SEC_KEY
+  },
+  maxAge: {
+    auth: 1000 * 60 * 60 * 24 * 7,
+    resetPassword: 1000 * 60 * 60 * 1 * 7,
   },
 };
 // database connection details
@@ -23,7 +27,7 @@ export const database = {
     dialect: "mariadb", // process.env.MYSQL_DIALECT
   },
   MONGO: {
-    url: "mongodb://0.0.0.0:27017/commerce-arch" //process.env.MONGO_URL,
+    url: "mongodb://0.0.0.0:27017/commerce-arch", //process.env.MONGO_URL,
   },
 };
 // nodemailer connections details
