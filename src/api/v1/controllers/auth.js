@@ -1,7 +1,11 @@
 import { auth } from "../../../config/config.js";
 import bcrypt from "bcrypt";
 import { errorLog } from "../../../util/logger.js";
-import { generateJWT, generateOTP, generateOTPExpiryTime } from "../lib/auth.js";
+import {
+  generateJWT,
+  generateOTP,
+  generateOTPExpiryTime,
+} from "../lib/auth.js";
 import { findUser, saveUser } from "../helpers/user.js";
 import { saveAuthentication, updateAuthentication } from "../helpers/auth.js";
 import { sendPasswordResetSms } from "../services/notification.service.js";
