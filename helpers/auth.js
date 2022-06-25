@@ -3,17 +3,51 @@
  * Date: 2022-06-22
  * Project: commerce-arch/helpers/auth.js
  * Description: Helper for authentication. This helper is used to validate the user's credentials (email and password)
- * Function: validateEmail (email) - Validates the email address provided by the user and returns the email if is valid
- * Function: validatePassword (password, confirmPassword) - Validates the passwords provided by the user and returns the confirmPassword if is valid
+ * Function: comparePassword (password, hashedPassword) <Promise> - Decrypt password in database and compare it with password provided by password
+ * Function: validateEmail (email)  <Promise> - Validates the email address provided by the user and returns error if not valid
+ * Function validateMobile (mobile) <Promise> - Adds country code to mobile
+ * Function: validatePassword (password, confirmPassword) <Promise> - Validates the passwords provided by the user and returns the
+ *                                                          confirmPassword if is valid and returns a hashed password
  */
-import isEmail from "validator/lib/isEmail.js";
+import { auth } from "../config/config.js";
+import bcrypt from "bcrypt";
+import { errorLog } from "../util/logger.js";
+import validator from "validator";
+
+export const comparePassword = (password, hashedPassword) => {
+  return new Promise((resolve, reject) => {
+    bcrypt
+      .compare(password, hashedPassword)
+      .then((isMatch) => {
+        resolve(isMatch);
+      })
+      .catch((err) => {
+        errorLog.error(`comparePassword ERROR: ${err}`);
+        reject(new Error("Failed to login, please try again."));
+      });
+  });
+};
 
 export const validateEmail = (email) => {
   return new Promise((resolve, reject) => {
-    if (!isEmail(email)) {
-      reject(new Error("Sorry, email is not valid,"));
+    if (validator.isEmail(email)) {
+      resolve();
+    } else {
+      reject(new Error("Sorry, invalid email."));
     }
-    resolve(email);
+  });
+};
+
+// FIXME: verify mobile number and add country code
+export const validateMobile = (mobile) => {
+  return new Promise((resolve) => {
+    if (mobile[0] === "0") {
+      mobile = mobile.replace(mobile.indexOf("0"), "+27").replace(/\s/g, "");
+    } else if (validator.isMobilePhone(mobile)) {
+      reject(new Error("Sorry, mobile is not valid"));
+    } else {
+      resolve();
+    }
   });
 };
 
@@ -34,7 +68,16 @@ export const validatePassword = (password, confirmPassword) => {
         )
       );
     } else {
-      resolve(confirmPassword);
+      bcrypt
+        .hash(confirmPassword, auth.bcrypt.salt)
+        .then((hashedPassword) => {
+          resolve(hashedPassword);
+        })
+        .catch((err) => {
+          // FIXME: return valid error
+          errorLog.error(new Error(`Bcrypt ERROR: ${err}`));
+          reject(new Error(err));
+        });
     }
   });
 };
