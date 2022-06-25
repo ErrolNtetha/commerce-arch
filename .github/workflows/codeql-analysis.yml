@@ -16,7 +16,7 @@ on:
     branches: [ "main", "authentication" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches: [ "main", "authentication" ]
   schedule:
     - cron: '27 2 * * 1'
 
