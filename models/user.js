@@ -15,14 +15,18 @@ const User = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  address: {
-    type: Array,
-    required: false,
-  },
+  // address: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Address",
+  // },
+  // authActivity: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Authentication",
+  // },
   password: {
     type: String,
     required: true,
   },
 });
 
-export default mongoose.model("user", User);
+export default mongoose.model("User", User);
