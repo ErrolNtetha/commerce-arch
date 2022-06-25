@@ -26,7 +26,7 @@ export const generateOTPExpiryTime = (otp, userId) => {
     },
     auth.jwt.secKey,
     {
-      expiresIn: "15m",
+      expiresIn: 60 * 60 * 15,
     }
   );
 };
