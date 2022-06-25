@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prod": "pm2 start server.js -i 4 --name commerce-arch --interpreter node --watch server.js"
   },
   "repository": {
     "type": "git",
@@ -36,12 +37,14 @@
     "helmet": "^5.1.0",
     "ip": "^1.1.8",
     "jsonwebtoken": "^8.5.1",
-    "mailgen": "^2.0.25",
+    "mailgen": "^2.0.26",
     "mariadb": "^3.0.0",
+    "mongoose": "^6.4.0",
     "node-device-detector": "^2.0.3",
     "nodemailer": "^6.7.5",
-    "npm-check-updates": "^14.0.1",
+    "npm-check-updates": "^14.1.1",
     "otp-generator": "^4.0.0",
+    "redis": "^4.1.0",
     "sequelize": "^6.21.0",
     "twilio": "^3.77.3",
     "uuid": "^8.3.2",
