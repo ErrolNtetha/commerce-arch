@@ -7,20 +7,20 @@ dotenv.config();
 // jwt, bcrypt config
 export const auth = {
   bcrypt: {
-    salt: process.env.BCRYPT_SALT,
+    salt: "12", // process.env.BCRYPT_SALT
   },
   jwt: {
-    secKey: process.env.JWT_SEC_KEY,
+    secKey: "commerce-arch", //process.env.JWT_SEC_KEY
   },
 };
 // database connection details
 export const database = {
   MYSQL: {
-    database: process.env.MYSQL_DATABASE,
-    username: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD,
-    host: process.env.MYSQL_HOST,
-    dialect: process.env.MYSQL_DIALECT,
+    database: "commerce_arch", // process.env.MYSQL_DATABASE
+    username: "elregalo", //process.env.MYSQL_USERNAME
+    password: "Mk327452_", // process.env.MYSQL_PASSWORD
+    host: "127.0.0.1", // process.env.MYSQL_HOST
+    dialect: "mariadb", // process.env.MYSQL_DIALECT
   },
   MONGO: {
     url: process.env.MONGO_URL,
