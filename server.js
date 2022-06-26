@@ -42,7 +42,8 @@ sequelize
 // auth routes
 app.use("/api/v1/auth", authRoutes);
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5500;
+
 app.listen(port, () => {
   successLog.info(`Server Started At: ${ip.address()}:${port}`);
 });
