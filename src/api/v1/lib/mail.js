@@ -1,15 +1,9 @@
-/*
- * Author: Moobi Kabelo
- * Date: 2022-06-22
- * Project: commerce-arch/lib/mail.js
- * Description: Lib for mail. This lib is used to create nodemailer transport and mailgen
- * Function: transporter () - Creates a nodemailer transport and returns the transport
- * Function: mailGenerator () - Creates a mailgen object, theme and returns the mailgen object
- */
+
 import Mailgen from "mailgen";
 import { mailer } from "../../../config/config.js";
 import nodemailer from "nodemailer";
 
+/* Creating a nodemailer transport and returning the transport */
 export const transporter = nodemailer.createTransport({
   host: mailer.nodemailer.host,
   port: mailer.nodemailer.port,
@@ -20,8 +14,9 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
+/* Creating a new mailgen object with the theme and product details */
 export const mailGenerator = new Mailgen({
-  theme: "salted", //default
+  theme: "default", //salted
   product: {
     name: "CommerceArch",
     link: "https://domain.com/",

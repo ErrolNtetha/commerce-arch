@@ -1,13 +1,12 @@
-/*
- * Author: Moobi Kabelo
- * Date: 2022-06-22
- * Project: Commerce Arch
- * Description: Template for auth. This template is used to create password reset, password alert email templates
- * Function: passwordResetEmail (fullName, token) - Sends a password reset email to the user
- * Function: passwordAlertEmail (fullNames, logger) - Send a password alert email to the user
- */
 import { mailGenerator } from "../lib/mail.js";
 
+/**
+ * It takes in two parameters, fullNames and token, and returns an object with a body property that
+ * contains the email body
+ * @param fullNames - The user's full names
+ * @param token - This is the token that will be sent to the user's email address.
+ * @returns An object with a body property that contains the email body.
+ */
 export const passwordResetEmail = (fullNames, token) => {
   const email = {
     body: {
@@ -30,6 +29,13 @@ export const passwordResetEmail = (fullNames, token) => {
   return mailGenerator.generate(email);
 };
 
+/**
+ * It takes in two parameters, fullNames and logger, and returns an object with a body property that
+ * contains the email body
+ * @param fullNames - The user's full names.
+ * @param logger - This is the object that contains the device, location and time of the user.
+ * @returns An object with a body property.
+ */
 export const passwordAlertEmail = (fullNames, logger) => {
   const email = {
     body: {

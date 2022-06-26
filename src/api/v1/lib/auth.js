@@ -1,16 +1,11 @@
-/*
- * Author: Moobi Kabelo
- * Date: 2022-06-22
- * Project: commerce-arch/helpers/otp.js
- * Description: Helper for generating OTP. This helper is used to generate a random OTP and otp expiry time
- * Function: generateOTP () - Generates a random OTP and returns the OTP
- * Function: generateOTPExpiryTime (otp, userId) - Generates otp expiry time using JsonWebToken and returns the jwt token
- * Function: generateJWT (userId, fullNames, expires) - Generates a jwt token and returns the jwt token
- */
 import { auth } from "../../../config/config.js";
 import jwt from "jsonwebtoken";
 import optGenerator from "otp-generator";
 
+/**
+ * It generates an 8 digit OTP with digits, special characters and upper case alphabets
+ * @returns A function that returns a string of 8 characters.
+ */
 export const generateOTP = () => {
   return optGenerator.generate(8, {
     digits: true,
@@ -18,7 +13,13 @@ export const generateOTP = () => {
     upperCaseAlphabets: true,
   });
 };
-//
+
+/**
+ * It generates a JWT token with the OTP and userId as payload, and sets the expiry time to 15 minutes
+ * @param otp - The OTP that you want to generate.
+ * @param userId - The user's ID
+ * @returns A JWT token
+ */
 export const generateOTPExpiryTime = (otp, userId) => {
   return jwt.sign(
     {
@@ -32,6 +33,13 @@ export const generateOTPExpiryTime = (otp, userId) => {
   );
 };
 
+/**
+ * It takes in a userId, fullNames and expires as arguments and returns a JWT token
+ * @param userId - The user's id
+ * @param fullNames - The full names of the user.
+ * @param expires - This is the time in seconds that the token will be valid for.
+ * @returns A JWT token
+ */
 export const generateJWT = (userId, fullNames, expires) => {
   return jwt.sign(
     {

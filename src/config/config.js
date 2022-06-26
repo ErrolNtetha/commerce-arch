@@ -1,10 +1,7 @@
-/*
- *
- */
 import dotenv from "dotenv";
 dotenv.config();
 
-// jwt, bcrypt config
+/* This is a constant that is exported. It is an object with three properties: bcrypt, jwt, and maxAge. */
 export const auth = {
   bcrypt: {
     salt: 12,
@@ -17,7 +14,8 @@ export const auth = {
     resetPassword: 60 * 60 * 15,
   },
 };
-// database connection details
+
+/* Exporting a constant called database. It is an object with two properties: MYSQL and MONGO. */
 export const database = {
   MYSQL: {
     database: process.env.MYSQL_DATABASE,
@@ -30,7 +28,8 @@ export const database = {
     url: process.env.MONGO_URL,
   },
 };
-// nodemailer connections details
+
+/* Exporting a constant called mailer. It is an object with two properties: nodemailer and twilio. */
 export const mailer = {
   nodemailer: {
     host: process.env.NODEMAILER_HOST,

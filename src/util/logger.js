@@ -1,13 +1,7 @@
-/*
- * Author: Moobi Kabelo
- * Date: 2022-06-22
- * Description: Lib for logger. This lib is used to log messages to files
- * Function: errorLog (message) - Logs a error message
- * Function: successLog (message) - Logs an success message
- */
 import "winston-daily-rotate-file";
 import winston from "winston";
 
+/* Creating a logger for errors */
 export const errorLog = winston.createLogger({
   name: "error",
   level: "error",
@@ -23,6 +17,7 @@ export const errorLog = winston.createLogger({
   ],
 });
 
+/* Creating a logger for success messages */
 export const successLog = winston.createLogger({
   name: "success",
   level: "info",
