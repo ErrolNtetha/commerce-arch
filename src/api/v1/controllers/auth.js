@@ -1,20 +1,33 @@
 import { auth } from "../../../config/config.js";
 import bcrypt from "bcrypt";
 import { errorLog } from "../../../util/logger.js";
+import { findUser, findUserById, saveUser } from "../helpers/user.js";
+import {
+  findOtp,
+  saveAuthentication,
+  updateAuthentication,
+} from "../helpers/auth.js";
+import {
+  sendPasswordResetEmail,
+  sendPasswordResetSms,
+} from "../services/auth.service.js";
 import {
   generateJWT,
   generateOTP,
   generateOTPExpiryTime,
 } from "../lib/auth.js";
-import { findUser, saveUser } from "../helpers/user.js";
-import { saveAuthentication, updateAuthentication } from "../helpers/auth.js";
-import { sendPasswordResetSms } from "../services/notification.service.js";
 import {
   validateEmail,
   validateMobile,
+  validateOTP,
   validatePassword,
 } from "../validator/auth.js";
 
+/**
+ * It creates a new user account
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 export const signUp = (req, res) => {
   const { email, fullNames, mobile, password, confirmPassword } = req.body;
 
@@ -31,7 +44,6 @@ export const signUp = (req, res) => {
         .then(() => {
           validatePassword(password, confirmPassword)
             .then(() => {
-              // encrypt password using bcrypt
               bcrypt.hash(password, 12).then((hashedPassword) => {
                 saveUser(
                   fullNames,
@@ -95,23 +107,26 @@ export const signUp = (req, res) => {
     });
 };
 
+/**
+ * It takes in the user's email and password, finds the user in the database, compares the password
+ * with the one in the database, and if they match, it generates a JWT and sends it back to the user
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 export const signIn = (req, res) => {
   const { email, password } = req.body;
 
   findUser(email, "")
     .then((foundUser) => {
-      // check if user not exist
       if (!foundUser) {
         return res.status(401).json({
           message: "Invalid email or password.",
           status: 404,
         });
       }
-      // decrypt and compare password
       bcrypt
         .compare(password, foundUser.password)
         .then((valid) => {
-          // if password dont match return error
           if (!valid) {
             return res.status(401).json({
               message: "Invalid email or password.",
@@ -150,10 +165,21 @@ export const signIn = (req, res) => {
     });
 };
 
+/**
+ * It checks if the user exists, if it does, it generates a JWT token and sends it to the user's email
+ * address or generates an OTP and sends it to the user's mobile number
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 export const resetPassword = (req, res) => {
-  const { email, method } = req.body;
+  let qEmail = req.query.email;
+  let qMobile = req.query.mobile;
 
-  findUser(email, "")
+  /* Checking if the query params are undefined and if they are, it is setting them to an empty string. */
+  if (qEmail === undefined) qEmail = "";
+  if (qMobile === undefined) qMobile = "";
+
+  findUser(qEmail, validateMobile(qMobile))
     .then((foundUser) => {
       if (!foundUser) {
         return res.status(404).json({
@@ -162,13 +188,30 @@ export const resetPassword = (req, res) => {
         });
       }
 
-      if (method === "email") {
-        // TODO: implement send email functionality
-      } else if (method === "sms") {
-        // TODO: implement send sms functionality
+      if (qEmail) {
+        const token = generateJWT(
+          foundUser._id,
+          foundUser.fullNames,
+          auth.maxAge.auth
+        );
+
+        sendPasswordResetEmail(foundUser.email, foundUser.fullNames, token)
+          .then((info) => {
+            res.status(201).json({
+              message: info,
+              status: 201,
+            });
+          })
+          .catch((err) => {
+            res.status(500).json({
+              message: err,
+              status: 500,
+            });
+          });
+      } else if (qMobile) {
         const otp = generateOTP();
 
-        // save otp and expire date to authentication
+        /* Updating the authentication collection with the generated OTP and the OTP expiry time. */
         updateAuthentication(foundUser._id, {
           otp,
           otpExpire: generateOTPExpiryTime(otp, foundUser._id),
@@ -196,21 +239,87 @@ export const resetPassword = (req, res) => {
             });
           });
       } else {
-        return res.status(500).json({
-          message: "Failed to fetch account, please try again.",
-          status: 500,
+        return res.status(422).json({
+          message: "Sorry, failed to process request .",
+          status: 422,
         });
       }
     })
     .catch((err) => {
-      errorLog.error(`findUsere: ${err}`);
+      errorLog.error(`findUser: ${err}`);
       res.status(500).json({
-        message: "find user",
+        message: "Sorry, failed to retrieve user, try again",
         status: 500,
       });
     });
 };
 
+/**
+ * It finds a user by id, then finds the otp associated with that user, then validates the otp
+ * @param req - The request object.
+ * @param res - The response object.
+ */
+export const verifyOtp = (req, res) => {
+  const { id } = req.params;
+  const { otp } = req.body;
+
+  findUserById({
+    _id: id,
+  })
+    .then((foundUser) => {
+      if (!foundUser) {
+        errorLog.error(`findUserById: ${foundUser}`);
+        return res.status(404).json({
+          message: "Sorry, account does not exist.",
+          status: 404,
+        });
+      }
+
+      findOtp(foundUser._id)
+        .then((auth) => {
+          if (!auth) {
+            return res.status(404).json({
+              message: "Sorry, account does not exist.",
+              status: 404,
+            });
+          }
+          validateOTP(otp, auth)
+            .then(() => {
+              res.status(201).json({
+                id: foundUser._id,
+                message: "OTP verified",
+                status: 201,
+              });
+            })
+            .catch((err) => {
+              res.status(500).json({
+                message: err,
+                status: 500,
+              });
+            });
+        })
+        .catch((err) => {
+          errorLog.error(`findOtp: ${err}`);
+          res.status(500).json({
+            message: "Sorry, failed to process request.",
+            status: 500,
+          });
+        });
+    })
+    .catch((err) => {
+      errorLog.error(`findUserById: ${err}`);
+      res.status(500).json({
+        message: "Sorry, failed to process request.",
+        status: 500,
+      });
+    });
+};
+
+/**
+ * It clears the cookie with the id of the user who is logging out
+ * @param req - The request object.
+ * @param res - The response object.
+ */
 export const signOut = (req, res) => {
   const { id } = req.params;
 
