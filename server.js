@@ -9,7 +9,7 @@ import { mongoose, sequelize } from "./src/api/v1/lib/database.js";
 import { authRoutes } from "./src/api/v1/routes/auth.routes.js";
 
 const app = express();
-
+const PORT = process.env.PORT || 5500;
 // middleware
 app.use(helmet());
 app.use(express.json());
@@ -42,8 +42,6 @@ sequelize
 // auth routes
 app.use("/api/v1/auth", authRoutes);
 
-const port = process.env.PORT || 5500;
-
-app.listen(port, () => {
-  successLog.info(`Server Started At: ${ip.address()}:${port}`);
+app.listen(PORT, () => {
+  successLog.info(`Server Started At: ${ip.address()}:${PORT}`);
 });
