@@ -49,5 +49,10 @@
     "uuid": "^8.3.2",
     "validator": "^13.7.0",
     "winston-daily-rotate-file": "^4.7.1"
+  },
+  {
+    "engines": {
+      "node": "16.x.x"
+    }
   }
 }
