@@ -15,14 +15,6 @@ const User = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  // address: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Address",
-  // },
-  // authActivity: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Authentication",
-  // },
   password: {
     type: String,
     required: true,
