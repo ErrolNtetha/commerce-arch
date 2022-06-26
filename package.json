@@ -9,10 +9,8 @@
     "start": "node server.js",
     "prod": "pm2 start server.js -i 4 --name commerce-arch --interpreter node --watch server.js"
   },
-   {
-    "engines": {
+   "engines": {
       "node": "16.x.x"
-    }
   },
   "repository": {
     "type": "git",
