@@ -1,4 +1,4 @@
-FROM node:erbium-alpine3.14
+FROM node:erbium-alpine3.15
 
 ENV PORT=5500
 
