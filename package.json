@@ -9,6 +9,11 @@
     "start": "node server.js",
     "prod": "pm2 start server.js -i 4 --name commerce-arch --interpreter node --watch server.js"
   },
+   {
+    "engines": {
+      "node": "16.x.x"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elregalo/commerce-arch.git"
@@ -49,10 +54,5 @@
     "uuid": "^8.3.2",
     "validator": "^13.7.0",
     "winston-daily-rotate-file": "^4.7.1"
-  },
-  {
-    "engines": {
-      "node": "16.x.x"
-    }
   }
 }
