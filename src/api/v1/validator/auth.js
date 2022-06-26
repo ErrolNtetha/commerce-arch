@@ -1,16 +1,11 @@
-/*
- * Author: Moobi Kabelo
- * Date: 2022-06-22
- * Project: commerce-arch/helpers/auth.js
- * Description: Helper for authentication. This helper is used to validate the user's credentials (email and password)
- * Function: comparePassword (password, hashedPassword) <Promise> - Decrypt password in database and compare it with password provided by password
- * Function: validateEmail (email)  <Promise> - Validates the email address provided by the user and returns error if not valid
- * Function validateMobile (mobile) <Promise> - Adds country code to mobile
- * Function: validatePassword (password, confirmPassword) <Promise> - Validates the passwords provided by the user and returns the
- *                                                          confirmPassword if is valid and returns a hashed password
- */
+import jwt from "jsonwebtoken";
 import validator from "validator";
 
+/**
+ * If the email is valid, resolve the promise, otherwise reject it.
+ * @param email - The email address to validate.
+ * @returns A promise that resolves if the email is valid, and rejects if it is not.
+ */
 export const validateEmail = (email) => {
   return new Promise((resolve, reject) => {
     if (validator.isEmail(email)) {
@@ -21,6 +16,12 @@ export const validateEmail = (email) => {
   });
 };
 
+/**
+ * It takes a mobile number as a string, checks if the first character is a zero, if it is, it replaces
+ * the zero with a +27(country code), and then removes all spaces
+ * @param mobile - The mobile number to be validated.
+ * @returns the mobile number with the first digit replaced with +27 and any spaces removed.
+ */
 export const validateMobile = (mobile) => {
   if (mobile[0] === "0") {
     return mobile.replace(mobile.indexOf("0"), "+27").replace(/\s/g, "");
@@ -28,6 +29,12 @@ export const validateMobile = (mobile) => {
   return mobile;
 };
 
+/**
+ * It returns a promise that resolves if the password is valid, and rejects if the password is invalid
+ * @param password - The password that the user entered.
+ * @param confirmPassword - The password that the user entered in the confirm password field.
+ * @returns A promise that resolves if the password is valid, and rejects if the password is invalid.
+ */
 export const validatePassword = (password, confirmPassword) => {
   return new Promise((resolve, reject) => {
     if (password !== confirmPassword) {
@@ -47,5 +54,27 @@ export const validatePassword = (password, confirmPassword) => {
     } else {
       resolve();
     }
+  });
+};
+
+/**
+ * It takes in an OTP and an auth object, and returns a promise that resolves if the OTP is valid, and
+ * rejects if it's not
+ * @param opt - The OTP that the user has entered.
+ * @param auth - The auth object that was returned from the database.
+ * @returns A promise that resolves if the OTP is valid, and rejects if it is not.
+ */
+export const validateOTP = (opt, auth) => {
+  return new Promise((resolve, reject) => {
+    if (opt === auth.otp) {
+      jwt.verify(opt, auth.otpExpiry, (err) => {
+        if (err) {
+          reject(new Error("Sorry, OTP has expired."));
+        } else {
+          resolve();
+        }
+      });
+    }
+    reject(new Error("Sorry, invalid OTP."));
   });
 };
