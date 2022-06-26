@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/elregalo/commerce-arch#readme",
   "engines": {
-    "node": "16.x.x"
+    "node": "18.x.x"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
