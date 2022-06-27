@@ -31,6 +31,12 @@ import {
 export const signUp = (req, res) => {
   const { email, fullNames, mobile, password, confirmPassword } = req.body;
 
+  if ((!email, !fullNames, !mobile, !password, !confirmPassword)) {
+    return res.status(400).json({
+      status: 400,
+      message: "All fields are required",
+    });
+  }
   findUser(email, mobile)
     .then((foundUser) => {
       if (foundUser) {
@@ -116,6 +122,12 @@ export const signUp = (req, res) => {
 export const signIn = (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({
+      status: 400,
+      message: "All fields are required",
+    });
+  }
   findUser(email, "")
     .then((foundUser) => {
       if (!foundUser) {
@@ -179,6 +191,12 @@ export const resetPassword = (req, res) => {
   if (qEmail === undefined) qEmail = "";
   if (qMobile === undefined) qMobile = "";
 
+  if (qEmail === "" && qMobile === "") {
+    return res.status(400).json({
+      message: "Email or mobile number is required",
+      status: 400,
+    });
+  }
   findUser(qEmail, validateMobile(qMobile))
     .then((foundUser) => {
       if (!foundUser) {
@@ -263,6 +281,12 @@ export const verifyOtp = (req, res) => {
   const { id } = req.params;
   const { otp } = req.body;
 
+  if (!id && !otp) {
+    return res.status(400).json({
+      message: "All fields are required",
+      status: 400,
+    });
+  }
   findUserById({
     _id: id,
   })
@@ -323,6 +347,12 @@ export const verifyOtp = (req, res) => {
 export const signOut = (req, res) => {
   const { id } = req.params;
 
+  if (!id) {
+    return res.status(400).json({
+      message: "User ID is required",
+      status: 400,
+    });
+  }
   res.clearCookie(id);
   res.status(200).json({
     message: "Logout successful",
