@@ -1,4 +1,3 @@
-
 import Mailgen from "mailgen";
 import { mailer } from "../../../config/config.js";
 import nodemailer from "nodemailer";
