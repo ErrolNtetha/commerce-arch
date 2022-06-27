@@ -7,47 +7,64 @@
 </p>
 
 <p align="center">
-
-<a href="https://deepsource.io/gh/elregalo/commerce-arch/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/elregalo/commerce-arch.svg/?label=active+issues&show_trend=true&token=ZUpIENwLsM1eEPF9_9N9QuRK"/></a>
+<a href="https://github.com/Afridek/commerce-arch/actions/workflows/node.js.yml"><img src="https://github.com/Afridek/commerce-arch/actions/workflows/node.js.yml/badge.svg"></a>
+<a href="https://github.com/Afridek/commerce-arch/actions/workflows/njsscan.yml">
+<img src="https://github.com/Afridek/commerce-arch/actions/workflows/njsscan.yml/badge.svg"></a>
+<a href="https://deepsource.io/gh/afridek/commerce-arch/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://deepsource.io/gh/afridek/commerce-arch.svg/?label=active+issues&show_trend=true&token=ZUpIENwLsM1eEPF9_9N9QuRK"/></a>
 <a href="https://github.com/elregalo/commerce-arch/actions/workflows/dependency-review.yml" title="Dependency Review"><img src="https://github.com/elregalo/commerce-arch/actions/workflows/dependency-review.yml/badge.svg" alt="Contributors - Welcome"></a>
 <a href="https://github.com/elregalo/commerce-arch/actions/workflows/devskim.yml" title="DevSkim"><img src="https://github.com/elregalo/commerce-arch/actions/workflows/devskim.yml/badge.svg?branch=main" alt="Contributors - Welcome"></a>
 <a href="https://github.com/elregalo/commerce-arch/actions/workflows/codeql-analysis.yml/badge.svg?branch=main" title="Codeql Analysis"><img src="https://github.com/elregalo/commerce-arch/actions/workflows/codeql-analysis.yml/badge.svg" alt="Contributors - Welcome"></a>
 <a href="https://"><img src="https://img.shields.io/badge/Maintained-Yes-success" alt="Maintained - Yes"></a>
-<a href="/CONTRIBUTING.md" title="Go to contributions doc"><img src="https://img.shields.io/badge/Contributors-Welcome-2ea44f" alt="Contributors - Welcome"></a>
 <br>
 
  </p>
 
+## Description
+>
+
 ## Setup
 
-### Local Setup
+### Installation
 
-    - git clone https://github.com/elregalo/commerce-arch.git
-    - cd commerce-arch
+```sh
+- git clone https://github.com/Afridek/commerce-arch.git
+- cd commerce-arch
+- npm install
+```
 
-### NPM
+### Setup Database
 
-    - npm install
-    - npm test (to run test)
-    - npm run dev
-
-### YARN
-
-    - yarn install
-
-## Useage
-
-### Setup database
-
-    -
+```sh
+- add .env in root dir
+- add your MySQL credentials in MYSQL_* variables
+- add your MongoDB url in MONGO_URL
+```
 
 ### Setup Nodemailer
 
-    -
+```sh
+- add your email credentials in the NODEMAILER_* variables
+```
 
-### Twilio
+### Setup Twilio
 
-    -
+```sh
+- add your twilio credentials in the TWILIO_ variables
+```
+
+## Usage
+
+### Postman
+
+```sh
+- import the docs/postman colelctions into your postman
+```
+
+### Curl
+
+```sh
+- $ bash docs/scripts/auth/register.sh (create an account)
+```
 
 ## Documentation
 
