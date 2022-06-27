@@ -1,1 +1,3 @@
-export * from "./auth.js";
+import * as validator from "./auth.js";
+
+export { validator };
