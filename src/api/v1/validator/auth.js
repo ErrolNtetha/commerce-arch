@@ -9,13 +9,12 @@ import validator from "validator";
 export const validateEmail = (email) => {
   return new Promise((resolve, reject) => {
     if (validator.isEmail(email)) {
-      resolve();
+      resolve(email);
     } else {
-      reject(new Error("Sorry, invalid email."));
+      reject("Sorry, invalid email.");
     }
   });
 };
-
 /**
  * It takes a mobile number as a string, checks if the first character is a zero, if it is, it replaces
  * the zero with a +27(country code), and then removes all spaces
@@ -38,18 +37,16 @@ export const validateMobile = (mobile) => {
 export const validatePassword = (password, confirmPassword) => {
   return new Promise((resolve, reject) => {
     if (password !== confirmPassword) {
-      reject(new Error("Sorry, passwords does not match."));
+      reject("Sorry, passwords does not match.");
     } else if (password.length < 8) {
-      reject(new Error("Sorry, password must be at least 8 characters long."));
+      reject("Sorry, password must be at least 8 characters long.");
     } else if (
       !password.match(/[a-z]/g) ||
       !password.match(/[A-Z]/g) ||
       !password.match(/[0-9]/g)
     ) {
       reject(
-        new Error(
-          "Password must contain at least one lowercase letter, one uppercase letter, and one number."
-        )
+        "Password must contain at least one lowercase letter, one uppercase letter, and one number."
       );
     } else {
       resolve();
@@ -69,12 +66,12 @@ export const validateOTP = (opt, auth) => {
     if (opt === auth.otp) {
       jwt.verify(opt, auth.otpExpiry, (err) => {
         if (err) {
-          reject(new Error("Sorry, OTP has expired."));
+          reject("Sorry, OTP has expired.");
         } else {
           resolve();
         }
       });
     }
-    reject(new Error("Sorry, invalid OTP."));
+    reject("Sorry, invalid OTP.");
   });
 };
