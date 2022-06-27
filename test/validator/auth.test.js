@@ -2,14 +2,14 @@ import { validator } from "../../src/api/v1/validator/index.js";
 
 /* Testing the email validation function. */
 test("check if email is valid", () => {
-  return expect(validator.validateEmail("giftmoobi@gmail.com")).resolves.toBe(
-    "giftmoobi@gmail.com"
+  return expect(validator.validateEmail("user.test@gmail.com")).resolves.toBe(
+    "user.test@gmail.com"
   );
 });
 
 test("reject if email is invalid", () => {
   return expect(
-    validator.validateEmail("giftmoobi@@gmail.com")
+    validator.validateEmail("user.test@@gmail.com")
   ).rejects.toMatch("Sorry, invalid email.");
 });
 
