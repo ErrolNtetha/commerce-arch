@@ -11,6 +11,10 @@ import { authRoutes } from "./routes/auth.routes.js";
 const app = express();
 const PORT = process.env.PORT || 5500;
 
+app.get('/', function(req, res) {
+    res.status(200).send('<h2> Server running successfully! </h2>');
+});
+
 // middleware
 app.use(helmet());
 app.use(express.json());
@@ -44,5 +48,6 @@ sequelize
 app.use("/api/v1/auth", authRoutes);
 
 app.listen(PORT, () => {
+    console.log(`Server Started At: ${ip.address()}:${PORT}`);
   successLog.info(`Server Started At: ${ip.address()}:${PORT}`);
 });
