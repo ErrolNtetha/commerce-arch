@@ -9,8 +9,8 @@
     "start": "node server.js",
     "prod": "pm2 start server.js -i 4 --name commerce-arch --interpreter node --watch server.js"
   },
-   "engines": {
-      "node": "16.x.x"
+  "engines": {
+    "node": "16.x.x"
   },
   "repository": {
     "type": "git",
@@ -45,12 +45,14 @@
     "mongoose": "^6.4.0",
     "node-device-detector": "^2.0.3",
     "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.18",
     "otp-generator": "^4.0.0",
     "redis": "^4.1.0",
     "sequelize": "^6.21.0",
     "twilio": "^3.77.3",
     "uuid": "^8.3.2",
     "validator": "^13.7.0",
+    "winston": "^3.8.0",
     "winston-daily-rotate-file": "^4.7.1"
   }
 }
