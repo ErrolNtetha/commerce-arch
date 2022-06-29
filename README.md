@@ -35,7 +35,7 @@
 
     - yarn install
 
-## Useage
+## Usage
 
 ### Setup database
 
